@@ -203,3 +203,114 @@ function findLongest(array) {
 }
 
 console.log(findLongest([1, 10, 100]));
+
+// Square Every Digit //
+function squareDigits(num) {
+  num = num.toString();
+  let total = '';
+  for (let i = 0; i < num.length; i++) {
+    total += `${parseInt(num.charAt(i)) * parseInt(num.charAt(i))}`;
+  }
+  return parseInt(total);
+}
+
+//Cleaner es6 solution
+
+function squareDigits(num) {
+  var array = num
+    .toString()
+    .split('')
+    .map(function (int) {
+      var i = parseInt(int);
+      return i * i;
+    });
+
+  return parseInt(array.join(''));
+}
+
+console.log(squareDigits(91));
+
+// Calculating with functions-higher order functions
+
+//this additional function below is needed to check if we are dealing with the number before
+// or after the operator and then decides whether to return the total or the next function
+
+function expression(number, operation) {
+  if (!operation) return number;
+  return operation(number);
+}
+
+function zero(operation) {
+  return expression(0, operation);
+}
+function one(operation) {
+  return expression(1, operation);
+}
+function two(operation) {
+  return expression(2, operation);
+}
+function three(operation) {
+  return expression(3, operation);
+}
+function four(operation) {
+  return expression(4, operation);
+}
+function five(operation) {
+  return expression(5, operation);
+}
+function six(operation) {
+  return expression(6, operation);
+}
+function seven(operation) {
+  return expression(7, operation);
+}
+function eight(operation) {
+  return expression(8, operation);
+}
+function nine(operation) {
+  return expression(9, operation);
+}
+
+function plus(x) {
+  return function (y) {
+    return y + x;
+  };
+}
+function minus(x) {
+  return function (y) {
+    return y - x;
+  };
+}
+function times(x) {
+  return function (y) {
+    return y * x;
+  };
+}
+function dividedBy(x) {
+  return function (y) {
+    return y / x;
+  };
+}
+
+// the function below starts with the inner most function and then works out
+
+console.log(seven(times(five())));
+
+//answer 35
+
+//HOF practice, with higher order functions the inner most function is returned first and then
+// it works outwards
+
+function HOC(x) {
+  return `The new number is ${x}`;
+}
+
+function multiply(num) {
+  return num * 2;
+}
+
+function temp(x) {
+  return x + ' degrees';
+}
+
+console.log(HOC(temp(multiply(5))));
